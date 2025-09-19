@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Launch MFC incubation and accelerator centre</title>
+    <!-- Tailwind CSS for styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        #container {
+            transition: all 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white flex items-center justify-center min-h-screen">
+    <div id="container" class="text-center p-8 bg-gray-800 rounded-xl shadow-2xl max-w-sm mx-auto">
+        <!-- This content shows initially -->
+        <div id="initialContent">
+            <!-- Main Heading -->
+            <h1 class="text-4xl font-bold mb-4 text-cyan-400">Launch MFC incubation and accelerator centre</h1>
+            
+            <!-- Description -->
+            <p class="text-gray-300 mb-8">
+                Click the button below to Inaugurate.
+            </p>
+            
+            <!-- Launch Button -->
+            <button 
+                onclick="launchVideo()"
+                class="bg-cyan-500 hover:bg-cyan-600 text-gray-900 font-bold py-3 px-8 rounded-lg shadow-lg transform transition-transform duration-300 hover:scale-105 focus:outline-none focus:ring-4 focus:ring-cyan-300">
+                🚀 Launch
+            </button>
+        </div>
+        
+        <!-- YouTube Player Container (hidden initially) -->
+        <div id="videoContainer" class="hidden w-full aspect-video">
+             <!-- The iframe for the YouTube player will be loaded here -->
+             <iframe id="youtubePlayer" class="w-full h-full" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+        </div>
+
+    </div>
+
+    <script>
+        function launchVideo() {
+            // --- IMPORTANT ---
+            // PASTE YOUR YOUTUBE VIDEO ID HERE
+            // The ID is the part of the URL after "v=". 
+            // For example, in "https://www.youtube.com/watch?v=dQw4w9WgXcQ", the ID is "dQw4w9WgXcQ".
+            const youtubeVideoId = 'TDV9z4Y8h_Y'; // Using a placeholder video about an accelerator
+            // ------------------------------------
+
+            const initialContent = document.getElementById('initialContent');
+            const container = document.getElementById('container');
+            const videoContainer = document.getElementById('videoContainer');
+            const player = document.getElementById('youtubePlayer');
+
+            // Set the YouTube video source with autoplay enabled
+            player.src = `https://www.youtube.com/embed/${youtubeVideoId}?autoplay=1&rel=0&modestbranding=1`;
+
+            // Hide the initial text and button
+            initialContent.classList.add('hidden');
+
+            // Show the video player container
+            videoContainer.classList.remove('hidden');
+            
+            // Expand the main container to fit the video
+            container.classList.remove('max-w-sm');
+            container.classList.add('max-w-4xl');
+
+            // Request fullscreen on the iframe
+            // Note: Browser security may require a user gesture (the click) to allow fullscreen.
+            if (player.requestFullscreen) {
+                player.requestFullscreen();
+            } else if (player.mozRequestFullScreen) { // Firefox
+                player.mozRequestFullScreen();
+            } else if (player.webkitRequestFullscreen) { // Chrome, Safari and Opera
+                player.webkitRequestFullscreen();
+            } else if (player.msRequestFullscreen) { // IE/Edge
+                player.msRequestFullscreen();
+            }
+        }
+    </script>
+</body>
+</html>
